@@ -40,22 +40,27 @@
   <button v-on:click="hello">CLick Handler</button>
   <button v-on:click="names = []">CLick Handler</button>
 
+  <!-- more directives -->
+
+  <div v-once>Hello I am once rendered</div>
+  <div v-pre>Hello I am pre and will not be compiled</div>
+
   <!-- Forms -->
   <div>{{ JSON.stringify(formValues) }}</div>
-  <form @submit="handleSubmit">
+  <form @submit.prevent="handleSubmit">
     <label for="name">Name:</label>
     <input
       type="text"
       name="name"
       placeholder="Name"
-      v-model="formValues.name"
+      v-model.trim.lazy="formValues.name"
     />
     <label for="age">Age:</label>
     <input
       type="number"
       name="age"
       placeholder="age"
-      v-model="formValues.age"
+      v-model.number="formValues.age"
     />
     <input
       type="checkbox"
@@ -114,11 +119,33 @@
       v-model="formValues.skills"
     />
   </form>
+  <Computed id="myID" />
+  <Card
+    ><template v-slot:hello="hey">
+      {{ hey }}
+      <img src="https://picsum.photos/200" alt="" /></template
+    ><template v-slot:hey>
+      <img src="https://picsum.photos/200" alt="" /></template
+  ></Card>
+  <Components
+    :userName="userName"
+    @close="userName = 'Rahul'"
+    v-model="componentValue"
+  />
 </template>
 
 <script lang="ts">
+import Components from "./components/Components.vue";
+import Card from "./components/Card.vue";
+import Computed from "./components/Computed.vue";
+
 export default {
   name: "App",
+  components: {
+    Computed: Computed,
+    Components: Components,
+    Card: Card
+  },
   data(): {
     message: string;
     binding: string;
@@ -136,6 +163,9 @@ export default {
       radio: string;
       skills: string[];
     };
+    userName: string;
+    componentValue: string;
+    dynamicClass: string;
   } {
     return {
       message: "Hello",
@@ -156,7 +186,10 @@ export default {
         checkbox: "no",
         radio: "",
         skills: []
-      }
+      },
+      componentValue: "",
+      userName: "Rakesh",
+      dynamicClass: "text-black"
     };
   },
   methods: {
@@ -166,12 +199,19 @@ export default {
       console.log("Hello");
     },
     handleSubmit(event: Event) {
-      event.preventDefault();
       const formData = new FormData(event.target as HTMLFormElement);
       const name = formData.get("name");
       const age = formData.get("age");
       console.log(name, age);
     }
+  },
+  provide() {
+    return {
+      username: this.students
+    };
   }
+  // provide: {
+  //   username: "Ritvik"
+  // }
 };
 </script>
