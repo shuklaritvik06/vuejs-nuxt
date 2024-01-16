@@ -1,4 +1,9 @@
 <template>
+  <!-- Parent Styles are read after the component tree styles by the parser hence if we try to apply different styles to the different components without scoping it will apply globally to the component tree and the parent would take the lead here and if we do not have the root element in any other child components in the component tree then the styles for those would be copied from the parent element styles and will cause the style leak. When using the slots the parent component styles are applied not the child one event though the content is embedded in the child element -->
+
+  <!-- Component tag is the tag which is given by vue itself it is helpful for rendering dynamic components. We can pass the name of the component to render or bind the data property to the is -->
+  <!-- Now if we want the keep the dynamic components state saved, even if the navigation between components is there, no new instance must be created  -->
+  <keep-alive> <component is="Computed" /></keep-alive>
   <div>{{ message }} {{ binding }}</div>
   <div :id="message"></div>
   <div v-text="binding"></div>
@@ -119,6 +124,7 @@
       v-model="formValues.skills"
     />
   </form>
+  <teleport to="#portal-root"> <Portal /></teleport>
   <Computed id="myID" />
   <Card
     ><template v-slot:hello="hey">
@@ -138,13 +144,15 @@
 import Components from "./components/Components.vue";
 import Card from "./components/Card.vue";
 import Computed from "./components/Computed.vue";
+import Portal from "./components/Portal.vue";
 
 export default {
   name: "App",
   components: {
     Computed: Computed,
     Components: Components,
-    Card: Card
+    Card: Card,
+    Portal: Portal
   },
   data(): {
     message: string;
