@@ -23,6 +23,12 @@ export default {
   data(): {
     firstName: string;
     lastName: string;
+    cart: {
+      id: number;
+      product: string;
+      cost: number;
+    }[];
+    count: number;
   } {
     return {
       firstName: "Hello",
@@ -56,7 +62,7 @@ export default {
   //   We can add a deep: true here to watch for deeply nested object property or the array changes
   watch: {
     count: {
-      handler(newVal, oldVal) {
+      handler(newVal, _oldVal) {
         if (newVal > 10) {
           alert("Hello");
         }

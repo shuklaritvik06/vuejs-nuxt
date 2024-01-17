@@ -138,6 +138,9 @@
     @close="userName = 'Rahul'"
     v-model="componentValue"
   />
+  <HTTP />
+  <Mixins />
+  <CompositionApi />
 </template>
 
 <script lang="ts">
@@ -145,6 +148,9 @@ import Components from "./components/Components.vue";
 import Card from "./components/Card.vue";
 import Computed from "./components/Computed.vue";
 import Portal from "./components/Portal.vue";
+import HTTP from "./components/HTTP.vue";
+import Mixins from "./components/Mixins.vue";
+import CompositionApi from "./components/CompositionApi.vue";
 
 export default {
   name: "App",
@@ -152,7 +158,10 @@ export default {
     Computed: Computed,
     Components: Components,
     Card: Card,
-    Portal: Portal
+    Portal: Portal,
+    HTTP: HTTP,
+    Mixins: Mixins,
+    CompositionApi: CompositionApi
   },
   data(): {
     message: string;

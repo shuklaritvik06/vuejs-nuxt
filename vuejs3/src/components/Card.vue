@@ -4,12 +4,12 @@
       <slot name="hey">default</slot>
     </div>
     <div>
-      <slot name="hello" :count="hello"></slot>
+      <slot name="hello"></slot>
     </div>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   name: "Card"
 };
