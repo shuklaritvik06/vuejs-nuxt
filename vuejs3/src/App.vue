@@ -3,6 +3,8 @@
 
   <!-- Component tag is the tag which is given by vue itself it is helpful for rendering dynamic components. We can pass the name of the component to render or bind the data property to the is -->
   <!-- Now if we want the keep the dynamic components state saved, even if the navigation between components is there, no new instance must be created  -->
+
+  <!-- Multi step form example is for this with state to be saved when switch -->
   <keep-alive> <component is="Computed" /></keep-alive>
   <div>{{ message }} {{ binding }}</div>
   <div :id="message"></div>
