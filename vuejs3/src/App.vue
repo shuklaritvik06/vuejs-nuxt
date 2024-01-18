@@ -143,6 +143,12 @@
   <HTTP />
   <Mixins />
   <CompositionApi />
+  <Provide />
+  <Lifecycle />
+  <CompositionRef />
+  <PropsComposition />
+  <CustomEvents />
+  <CompositionReusability />
 </template>
 
 <script lang="ts">
@@ -153,6 +159,13 @@ import Portal from "./components/Portal.vue";
 import HTTP from "./components/HTTP.vue";
 import Mixins from "./components/Mixins.vue";
 import CompositionApi from "./components/CompositionApi.vue";
+import { provide, reactive, ref } from "vue";
+import ProvideInject from "./components/ProvideInject.vue";
+import Lifecycle from "./components/Lifecycle.vue";
+import CompositionRef from "./components/CompositionRef.vue";
+import CompositionProps from "./components/CompositionProps.vue";
+import CustomEvents from "./components/CustomEvents.vue";
+import Reusability from "./components/Reusability.vue";
 
 export default {
   name: "App",
@@ -163,7 +176,13 @@ export default {
     Portal: Portal,
     HTTP: HTTP,
     Mixins: Mixins,
-    CompositionApi: CompositionApi
+    CompositionApi: CompositionApi,
+    Provide: ProvideInject,
+    Lifecycle: Lifecycle,
+    CompositionRef: CompositionRef,
+    PropsComposition: CompositionProps,
+    CustomEvents: CustomEvents,
+    CompositionReusability: Reusability
   },
   data(): {
     message: string;
@@ -228,6 +247,16 @@ export default {
     return {
       username: this.students
     };
+  },
+  props: [],
+  setup() {
+    const refValue = provide("providedRef", ref("Ramesh"));
+    const state = reactive({
+      first: "Rahul"
+    });
+    const reactiveValue = provide("react", state.first);
+    const provideValue = provide("body", "Provided Value");
+    return { provideValue, refValue, reactiveValue };
   }
   // provide: {
   //   username: "Ritvik"
